@@ -1,0 +1,25 @@
+{
+  "name": "cra",
+  "version": "0.0.1",
+  "description": "Create React app Running with rsbuild",
+  "workspaces": [
+    "./host",
+    "./remote",
+    "./sharedComponents"
+  ],
+  "scripts": {
+    "start": "pnpm --filter cra_* start",
+    "build": "pnpm --filter cra_* build",
+    "e2e:ci": "pnpm start & npx cypress run --config-file ../cypress-e2e/config/cypress.config.ts --config '{\"supportFile\": \"../cypress-e2e/support/e2e.ts\"}' --spec \"./e2e/*.cy.ts\" --browser=chrome && lsof -ti tcp:3000,3001,3002 | xargs kill",
+    "test": "vitest"
+  },
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.4",
+    "@testing-library/react": "^14.2.1",
+    "axios": "^1.6.7",
+    "concurrently": "7.6.0",
+    "forever": "4.0.3",
+    "vitest": "^1.2.2",
+    "wait-on": "^7.1.0"
+  }
+}
